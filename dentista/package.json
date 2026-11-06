@@ -12,7 +12,6 @@
   "dependencies": {
     "@fontsource/cormorant-garamond": "^5.3.0",
     "@fontsource/manrope": "^5.3.0",
-    "@gsap/react": "^2.1.2",
     "gsap": "^3.15.1",
     "lucide-react": "^1.69.0",
     "react": "^19.3.1",

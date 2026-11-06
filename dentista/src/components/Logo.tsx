@@ -8,7 +8,7 @@ export function Logo({ light = false }: { light?: boolean }) {
   }
   return (
     <span
-      className={`font-serif text-[1.45rem] font-semibold leading-none tracking-tight md:text-[1.6rem] ${
+      className={`font-serif text-[1.45rem] font-medium leading-none tracking-tight md:text-[1.6rem] ${
         light ? 'text-bg' : 'text-green'
       }`}
     >

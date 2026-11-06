@@ -13,5 +13,5 @@ export function imageSrcSet(img: ImageSpec, widths: number[]) {
 }
 
 /** Larguras e `sizes` da foto do hero — usados no <img> e no preload do <head> */
-export const heroWidths = [480, 720, 960, 1280, 1600];
-export const heroSizes = '(min-width: 1024px) 56vw, 100vw';
+export const heroWidths = [480, 640, 720, 800, 960, 1280, 1600];
+export const heroSizes = '(min-width: 1024px) 56vw, calc(100vw - 2.5rem)';

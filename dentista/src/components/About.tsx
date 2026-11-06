@@ -14,8 +14,8 @@ export function About() {
             <div data-mask className="overflow-hidden rounded-[14px]">
               <Img
                 image={images.about}
-                widths={[480, 720, 960, 1200]}
-                sizes="(min-width: 1024px) 38vw, 100vw"
+                widths={[480, 640, 800, 960, 1200]}
+                sizes="(min-width: 1024px) 38vw, calc(100vw - 2.5rem)"
                 className="aspect-[4/5] h-auto w-full object-cover"
               />
             </div>

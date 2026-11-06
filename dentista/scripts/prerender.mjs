@@ -9,7 +9,13 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
-const template = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
+// CSS embutido no HTML: some a requisição que bloqueia a primeira pintura
+const inlineCss = (html) =>
+  html.replace(/<link rel="stylesheet"[^>]*href="([^"]+\.css)"[^>]*>/g, (_, href) => {
+    const css = fs.readFileSync(path.join(dist, href.replace(/^\.?\//, '')), 'utf8');
+    return `<style>${css}</style>`;
+  });
+const template = inlineCss(fs.readFileSync(path.join(dist, 'index.html'), 'utf8'));
 const { render, faviconSvg, pendingMarkers } = await import(
   pathToFileURL(path.join(root, '.ssr', 'entry-server.js')).href
 );

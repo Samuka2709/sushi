@@ -1,24 +1,24 @@
-import { useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+import { useEffect, useRef } from 'react';
 
 /**
  * Todas as animações da página (GSAP + ScrollTrigger), com limpeza automática ao desmontar.
  * Só anima transform, opacity e clip-path. O conteúdo já vem visível no HTML;
  * aqui ele é escondido apenas para ser revelado.
+ *
+ * O GSAP é baixado só depois que a página carrega (import dinâmico), para não
+ * disputar banda com a foto do topo. A entrada do hero é feita em CSS.
  */
 export function useAnimations() {
   const scope = useRef<HTMLDivElement>(null);
 
-  useGSAP(
-    () => {
-      const root = document.documentElement;
-      // Avisa o temporizador do <head> que o JavaScript carregou
-      (window as unknown as { __animReady?: boolean }).__animReady = true;
+  useEffect(() => {
+    let cleanup = () => {};
+    let cancelled = false;
 
+    const start = async () => {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([import('gsap'), import('gsap/ScrollTrigger')]);
+      if (cancelled) return;
+      gsap.registerPlugin(ScrollTrigger);
       const mm = gsap.matchMedia();
       mm.add(
         {
@@ -32,7 +32,6 @@ export function useAnimations() {
 
           /* ---------- Movimento reduzido: só fades curtos ---------- */
           if (reduce) {
-            root.classList.remove('js-ready');
             q('[data-reveal], [data-card]').forEach((el) => {
               gsap.from(el, {
                 opacity: 0,
@@ -45,14 +44,6 @@ export function useAnimations() {
 
           const dist = desktop ? 32 : 20;
           const dur = desktop ? 0.7 : 0.5;
-
-          /* ---------- Hero: zoom da imagem + entrada em sequência (< 1.5s) ---------- */
-          const heroItems = q('[data-hero-item]');
-          gsap.set(heroItems, { opacity: 0, y: 24 });
-          root.classList.remove('js-ready'); // a partir daqui o GSAP controla a visibilidade
-          const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-          tl.to(heroItems, { opacity: 1, y: 0, duration: 0.8, stagger: 0.12 }, 0.05);
-          tl.fromTo(q('[data-hero-image]'), { scale: 1.08 }, { scale: 1, duration: 1.6, ease: 'power2.out' }, 0);
 
           /* ---------- Parallax leve (desktop, máx. ~10%) ---------- */
           if (desktop) {
@@ -109,7 +100,12 @@ export function useAnimations() {
 
           /* ---------- Galeria: cada foto se abre com máscara, alternando a direção ---------- */
           q('[data-gallery-item]').forEach((el, i) => {
-            const from = ['inset(100% 0% 0% 0%)', 'inset(0% 0% 0% 100%)', 'inset(0% 0% 100% 0%)', 'inset(0% 100% 0% 0%)'][i % 4];
+            const from = [
+              'inset(100% 0% 0% 0%)',
+              'inset(0% 0% 0% 100%)',
+              'inset(0% 0% 100% 0%)',
+              'inset(0% 100% 0% 0%)',
+            ][i % 4];
             gsap.fromTo(
               el,
               { clipPath: desktop ? from : 'inset(100% 0% 0% 0%)', y: dist },
@@ -140,14 +136,25 @@ export function useAnimations() {
         },
       );
 
-      // Fontes e imagens podem mudar alturas: recalcula os gatilhos
       document.fonts?.ready.then(() => ScrollTrigger.refresh());
-      window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
+      cleanup = () => mm.revert();
+    };
 
-      return () => mm.revert();
-    },
-    { scope },
-  );
+    // Depois do carregamento (e de um respiro), para não atrasar a primeira pintura
+    const run = () => {
+      const idle = (window as Window & { requestIdleCallback?: (cb: () => void) => void }).requestIdleCallback;
+      if (idle) idle(() => void start());
+      else setTimeout(() => void start(), 200);
+    };
+    if (document.readyState === 'complete') run();
+    else window.addEventListener('load', run, { once: true });
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener('load', run);
+      cleanup();
+    };
+  }, []);
 
   return scope;
 }

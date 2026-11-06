@@ -1,8 +1,6 @@
 /* Fontes auto-hospedadas (font-display: swap), só os pesos usados e só o subconjunto latino */
 @import '@fontsource/cormorant-garamond/latin-500.css';
-@import '@fontsource/cormorant-garamond/latin-600.css';
 @import '@fontsource/manrope/latin-400.css';
-@import '@fontsource/manrope/latin-500.css';
 @import '@fontsource/manrope/latin-600.css';
 
 @import 'tailwindcss';
@@ -227,13 +225,26 @@
 }
 
 /*
- * Animações: o HTML já vem com tudo visível. Só quando o JavaScript carrega
- * (classe js-ready no <html>) o hero começa escondido para entrar animado.
- * Se o script falhar, um temporizador no <head> remove a classe.
+ * Entrada do hero em CSS puro: começa junto com a primeira pintura, sem esperar o
+ * JavaScript. A animação termina no estado visível, então nada fica escondido se algo falhar.
  */
-@media (prefers-reduced-motion: no-preference) {
-  .js-ready [data-hero-item] {
+@keyframes hero-in {
+  from {
     opacity: 0;
+    transform: translateY(24px);
+  }
+}
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.08);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-hero-item] {
+    animation: hero-in 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+  }
+  [data-hero-zoom] {
+    animation: hero-zoom 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   }
 }
 

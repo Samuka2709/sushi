@@ -12,17 +12,30 @@ export function Hero() {
     <section id="topo" aria-labelledby="hero-title" className="relative pb-16 pt-6 md:pb-24 lg:pt-10">
       <div className="container-x grid items-center gap-10 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-5 lg:py-12">
-          <p className="eyebrow" data-hero-item>
+          <p className="eyebrow" data-hero-item style={{ animationDelay: '50ms' }}>
             <Ph>{c.heroEyebrow}</Ph>
           </p>
-          <h1 id="hero-title" data-hero-item className="mt-4 text-[clamp(2.6rem,1.6rem+4.6vw,5rem)] leading-[1.02]">
+          <h1
+            id="hero-title"
+            data-hero-item
+            style={{ animationDelay: '170ms' }}
+            className="mt-4 text-[clamp(2.6rem,1.6rem+4.6vw,5rem)] leading-[1.02]"
+          >
             <Ph>{c.heroTitle}</Ph>
           </h1>
-          <p data-hero-item className="mt-5 max-w-[34ch] text-[1.125rem] text-muted md:text-[1.2rem]">
+          <p
+            data-hero-item
+            style={{ animationDelay: '290ms' }}
+            className="mt-5 max-w-[34ch] text-[1.125rem] text-muted md:text-[1.2rem]"
+          >
             <Ph>{c.heroSubtitle}</Ph>
           </p>
 
-          <div data-hero-item className="mt-7 flex flex-col gap-3 md:mt-9 sm:flex-row sm:flex-wrap">
+          <div
+            data-hero-item
+            style={{ animationDelay: '410ms' }}
+            className="mt-7 flex flex-col gap-3 md:mt-9 sm:flex-row sm:flex-wrap"
+          >
             <a href={whatsappUrl()} target="_blank" rel="noopener" className="btn btn-primary">
               <MessageCircle aria-hidden size={19} />
               Agendar pelo WhatsApp
@@ -35,6 +48,7 @@ export function Hero() {
           {/* Prova prática: onde fica e quando atende — nada de números inventados */}
           <ul
             data-hero-item
+            style={{ animationDelay: '530ms' }}
             className="mt-6 grid gap-2 border-t border-taupe/40 pt-5 md:mt-8 md:pt-6 text-[0.95rem] text-muted"
           >
             <li className="flex items-start gap-2.5">
@@ -54,14 +68,16 @@ export function Hero() {
 
         <div className="relative lg:col-span-7 lg:-mr-[max(2.5rem,calc((100vw-82rem)/2+2.5rem))]">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[14px] sm:aspect-[16/12] lg:aspect-auto lg:h-[min(82vh,52rem)] lg:rounded-r-none">
-            <Img
-              image={images.hero}
-              widths={heroWidths}
-              sizes={heroSizes}
-              priority
-              data-hero-image
-              className="absolute inset-0 h-full w-full object-cover will-change-transform"
-            />
+            <div data-hero-zoom className="absolute inset-0">
+              <Img
+                image={images.hero}
+                widths={heroWidths}
+                sizes={heroSizes}
+                priority
+                data-hero-image
+                className="absolute inset-0 h-full w-full object-cover will-change-transform"
+              />
+            </div>
           </div>
         </div>
       </div>
