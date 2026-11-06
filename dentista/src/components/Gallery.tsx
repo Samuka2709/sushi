@@ -32,17 +32,17 @@ export function Gallery() {
           {photos.map((img, i) => (
             <li
               key={i}
-              className={`overflow-hidden rounded-[14px] bg-sand ${layout[i] ?? 'aspect-[4/5]'} ${
+              data-gallery-item
+              className={`group overflow-hidden rounded-[14px] bg-sand ${layout[i] ?? 'aspect-[4/5]'} ${
                 photos.length % 2 === 0 && i === photos.length - 1 ? 'col-span-2 aspect-[16/9]' : ''
               }`}
-              {...(i === 0 ? { 'data-mask': '' } : {})}
             >
               <Img
                 image={img}
                 widths={[400, 700, 1000, 1400]}
                 sizes={i === 0 ? '(min-width: 1024px) 55vw, 100vw' : '(min-width: 1024px) 34vw, 50vw'}
                 data-parallax
-                className="h-full w-full scale-[1.12] object-cover"
+                className="h-full w-full scale-[1.12] object-cover transition-[scale] duration-700 ease-out group-hover:scale-[1.18]"
               />
             </li>
           ))}

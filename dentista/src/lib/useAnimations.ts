@@ -107,6 +107,23 @@ export function useAnimations() {
             });
           });
 
+          /* ---------- Galeria: cada foto se abre com máscara, alternando a direção ---------- */
+          q('[data-gallery-item]').forEach((el, i) => {
+            const from = ['inset(100% 0% 0% 0%)', 'inset(0% 0% 0% 100%)', 'inset(0% 0% 100% 0%)', 'inset(0% 100% 0% 0%)'][i % 4];
+            gsap.fromTo(
+              el,
+              { clipPath: desktop ? from : 'inset(100% 0% 0% 0%)', y: dist },
+              {
+                clipPath: 'inset(0% 0% 0% 0%)',
+                y: 0,
+                duration: desktop ? 1.2 : 0.8,
+                delay: desktop ? (i % 2) * 0.15 : 0,
+                ease: 'power3.inOut',
+                scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+              },
+            );
+          });
+
           /* ---------- Máscara de revelação (de baixo para cima) ---------- */
           q('[data-mask]').forEach((el) => {
             gsap.fromTo(
