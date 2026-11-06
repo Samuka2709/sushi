@@ -72,16 +72,16 @@ export const clinic = {
 
   name: 'Clínica Lumière Odontologia', // DEMO
   specialty: 'Clínica odontológica',
-  city: 'São Paulo', // DEMO
-  neighborhood: 'Vila Mariana', // DEMO
-  state: 'SP', // DEMO
+  city: 'Ilhéus', // DEMO
+  neighborhood: 'Centro', // DEMO
+  state: 'BA', // DEMO
 
   responsible: {
     name: 'Dra. Helena Duarte', // DEMO — fictícia
-    cro: 'CRO-SP 00.000', // DEMO — fictício
+    cro: 'CRO-BA 00.000', // DEMO — fictício
   },
 
-  phone: '(11) 3000-0000', // DEMO
+  phone: '(73) 3000-0000', // DEMO
   /** Só números, com DDI 55. Vazio = abre o WhatsApp para escolher o contato. */
   whatsapp: '', // DEMO
   whatsappMessage: 'Olá, vim pelo site e gostaria de agendar uma consulta.',
@@ -89,10 +89,10 @@ export const clinic = {
   address: {
     street: 'Rua das Acácias, 120', // DEMO — endereço fictício
     complement: 'Sala 4',
-    neighborhood: 'Vila Mariana',
-    city: 'São Paulo',
-    state: 'SP',
-    zip: '04000-000',
+    neighborhood: 'Centro',
+    city: 'Ilhéus',
+    state: 'BA',
+    zip: '45650-000',
   },
   mapsUrl: '', // DEMO — vazio = busca pelo endereço
 
@@ -188,27 +188,27 @@ export const clinic = {
       title: 'Plano explicado',
       text: 'Você recebe o plano de tratamento por escrito, com as etapas.',
     },
-    { icon: 'map-pin', title: 'Perto do metrô', text: 'A poucos minutos a pé da estação Vila Mariana.' },
+    { icon: 'map-pin', title: 'No Centro', text: 'Fácil de chegar, perto do comércio e dos pontos de ônibus.' },
   ] as { icon: IconName; title: string; text: string }[],
 
   team: [
     {
       name: 'Dra. Helena Duarte', // DEMO — fictícia
-      cro: 'CRO-SP 00.000',
+      cro: 'CRO-BA 00.000',
       specialty: 'Implantodontia',
       bio: 'Responsável técnica da clínica. Atua em reabilitação oral e implantes.',
       photo: 'helena',
     },
     {
       name: 'Dr. Rafael Moreira', // DEMO — fictício
-      cro: 'CRO-SP 00.001',
+      cro: 'CRO-BA 00.001',
       specialty: 'Ortodontia',
       bio: 'Atende adolescentes e adultos com aparelhos fixos e alinhadores.',
       photo: 'rafael',
     },
     {
       name: 'Dra. Camila Nogueira', // DEMO — fictícia
-      cro: 'CRO-SP 00.002',
+      cro: 'CRO-BA 00.002',
       specialty: 'Dentística e estética',
       bio: 'Cuida de restaurações, clareamento e facetas.',
       photo: 'camila',
@@ -222,13 +222,13 @@ export const clinic = {
   beforeAfter: [] as { treatment: string; before: string; after: string }[],
 
   content: {
-    heroEyebrow: 'Vila Mariana · São Paulo',
-    heroTitle: 'Odontologia no coração da Vila Mariana',
+    heroEyebrow: 'Centro · Ilhéus, BA',
+    heroTitle: 'Odontologia no coração de Ilhéus',
     heroSubtitle: 'Clínico geral, implantes, ortodontia e estética, com consultas sem pressa.',
 
     aboutTitle: 'Um consultório para ser atendido sem pressa',
     aboutParagraphs: [
-      'A Clínica Lumière fica na Vila Mariana, em São Paulo. Atendemos adultos e famílias, da prevenção à reabilitação.',
+      'A Clínica Lumière fica no Centro de Ilhéus. Atendemos adultos e famílias, da prevenção à reabilitação.',
       'A primeira consulta começa por uma conversa. Depois do exame, explicamos o que encontramos e as opções de tratamento, com as etapas por escrito.',
       'O espaço tem salas com luz natural e radiografia digital no próprio consultório.',
     ],
@@ -259,7 +259,7 @@ export const clinic = {
       },
       {
         q: 'Tem estacionamento?',
-        a: 'Há estacionamento conveniado na mesma rua. A clínica fica a poucos minutos a pé do metrô.',
+        a: 'Há estacionamento conveniado na mesma rua. A clínica fica no Centro, perto dos pontos de ônibus.',
       },
       {
         q: 'Como faço para agendar?',
