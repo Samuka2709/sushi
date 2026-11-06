@@ -1,4 +1,4 @@
-import { Clock, MapPin, MessageCircle } from 'lucide-react';
+import { Clock, MapPin, MessageCircle, ShieldCheck } from 'lucide-react';
 import { clinic } from '../config/clinic';
 import { images } from '../config/images';
 import { hoursSummary, shortAddress, whatsappUrl } from '../lib/clinic-utils';
@@ -9,7 +9,7 @@ import { Ph } from './Ph';
 export function Hero() {
   const c = clinic.content;
   return (
-    <section id="topo" aria-labelledby="hero-title" className="relative pb-16 pt-6 md:pb-24 lg:pt-10">
+    <section id="topo" aria-labelledby="hero-title" className="relative pb-20 pt-6 md:pb-28 lg:pt-10">
       <div className="container-x grid items-center gap-10 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-5 lg:py-12">
           <p className="eyebrow" data-hero-item style={{ animationDelay: '50ms' }}>
@@ -78,6 +78,25 @@ export function Hero() {
                 className="absolute inset-0 h-full w-full object-cover will-change-transform"
               />
             </div>
+          </div>
+          {/* Selo flutuante com o responsável técnico — dado real da configuração */}
+          <div
+            data-hero-item
+            style={{ animationDelay: '700ms' }}
+            className="absolute -bottom-6 left-4 right-4 flex items-center gap-4 rounded-[12px] border border-taupe/30 bg-bg/95 p-4 shadow-[0_18px_40px_-20px_rgb(36_39_37/0.45)] sm:right-auto sm:max-w-sm lg:-left-10 lg:bottom-10"
+          >
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green text-bg">
+              <ShieldCheck aria-hidden size={20} strokeWidth={1.75} />
+            </span>
+            <span className="text-[0.9rem] leading-snug">
+              <span className="block text-muted">Responsabilidade técnica</span>
+              <span className="block font-semibold text-ink">
+                <Ph>{clinic.responsible.name}</Ph>
+              </span>
+              <span className="block text-muted">
+                <Ph>{clinic.responsible.cro}</Ph>
+              </span>
+            </span>
           </div>
         </div>
       </div>

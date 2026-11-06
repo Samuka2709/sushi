@@ -50,10 +50,17 @@ export function Treatments() {
             )}
             <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
               {group.items.map((t, i) => (
-                <li key={t.id} data-card className="card card-hover flex flex-col p-7 md:p-8">
-                  <span aria-hidden className="font-serif text-[1.05rem] text-taupe">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
+                <li key={t.id} data-card className="card card-hover group/card flex flex-col p-7 md:p-8">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span aria-hidden className="font-serif text-[1.6rem] leading-none text-green/35">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    {!group.category && (
+                      <span className="text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-muted">
+                        <Ph>{t.category}</Ph>
+                      </span>
+                    )}
+                  </div>
                   <h3 className="mt-3 text-[1.85rem]">
                     <Ph>{t.name}</Ph>
                   </h3>
@@ -68,7 +75,11 @@ export function Treatments() {
                       className="link inline-flex min-h-11 cursor-pointer items-center gap-2"
                     >
                       Saiba mais <span className="sr-only">sobre {t.name}</span>
-                      <ArrowRight aria-hidden size={17} />
+                      <ArrowRight
+                        aria-hidden
+                        size={17}
+                        className="transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover/card:translate-x-1"
+                      />
                     </summary>
                     <div className="mt-3 space-y-3 text-[1rem] text-ink/90">
                       {t.details.map((d, j) => (
@@ -83,12 +94,30 @@ export function Treatments() {
             </ul>
           </div>
         ))}
+
+        <div
+          className="mt-12 flex flex-col gap-5 rounded-[14px] border border-taupe/40 p-7 sm:flex-row sm:items-center sm:justify-between md:p-8"
+          data-reveal
+        >
+          <div>
+            <p className="font-serif text-[1.7rem] leading-tight text-green">Não sabe por onde começar?</p>
+            <p className="mt-1 text-muted">Agende uma avaliação: o plano de tratamento é definido depois do exame.</p>
+          </div>
+          <a
+            href={whatsappUrl(`${clinic.whatsappMessage} Gostaria de agendar uma avaliação.`)}
+            target="_blank"
+            rel="noopener"
+            className="btn btn-primary shrink-0"
+          >
+            <MessageCircle aria-hidden size={19} />
+            Agendar avaliação
+          </a>
+        </div>
       </div>
 
       <dialog
         ref={dialogRef}
         aria-labelledby="treatment-dialog-title"
-        onClose={() => setActive(null)}
         onClick={(e) => e.target === dialogRef.current && dialogRef.current?.close()}
         className="m-auto w-[min(40rem,calc(100vw-2rem))] max-h-[85vh] rounded-[16px] bg-bg p-0 text-ink shadow-2xl"
       >

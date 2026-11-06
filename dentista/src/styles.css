@@ -26,6 +26,7 @@
   --font-sans: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --radius-card: 12px;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --shadow-soft: 0 1px 2px rgb(36 39 37 / 0.04), 0 8px 24px -12px rgb(36 39 37 / 0.12);
 }
 
@@ -101,6 +102,19 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--color-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  /* Fio curto antes do rótulo: detalhe editorial em taupe (só decoração) */
+  .eyebrow::before {
+    content: '';
+    width: 1.75rem;
+    height: 1px;
+    background: var(--color-taupe);
+  }
+  .on-dark .eyebrow::before {
+    background: rgb(217 207 192 / 0.5);
   }
   .on-dark .eyebrow {
     color: var(--color-sand);
@@ -122,11 +136,25 @@
     font-size: 0.975rem;
     line-height: 1.2;
     text-decoration: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     transition:
-      background-color 200ms,
-      color 200ms,
-      border-color 200ms,
-      transform 200ms;
+      background-color 200ms ease,
+      color 200ms ease,
+      border-color 200ms ease,
+      transform 160ms var(--ease-out);
+  }
+  /* Resposta imediata ao toque/clique */
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn svg {
+    transition: transform 200ms var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover svg {
+      transform: translateX(2px);
+    }
   }
   .btn-primary {
     background: var(--color-green);
@@ -176,10 +204,11 @@
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-soft);
     transition:
-      transform 200ms ease,
-      box-shadow 200ms ease;
+      transform 200ms var(--ease-out),
+      box-shadow 200ms var(--ease-out),
+      border-color 200ms ease;
   }
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     .card-hover:hover {
       transform: translateY(-4px);
       box-shadow:
@@ -255,11 +284,60 @@ body.menu-open .mobile-cta {
 
 details > summary {
   list-style: none;
+  cursor: pointer;
 }
 details > summary::-webkit-details-marker {
   display: none;
 }
 
+/* Painel de tratamento: entra com fade + escala leve (modal fica centralizado) */
+dialog {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 220ms var(--ease-out),
+    transform 220ms var(--ease-out),
+    overlay 220ms allow-discrete,
+    display 220ms allow-discrete;
+}
+dialog:not([open]) {
+  opacity: 0;
+  transform: scale(0.96);
+}
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
 dialog::backdrop {
   background: rgb(36 39 37 / 0.45);
+  backdrop-filter: blur(2px);
+}
+@media (prefers-reduced-motion: reduce) {
+  dialog {
+    transform: none !important;
+  }
+}
+
+/* Link do menu: sublinhado que cresce da esquerda */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.25rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
 }

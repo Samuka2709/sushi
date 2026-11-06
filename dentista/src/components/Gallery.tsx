@@ -42,7 +42,7 @@ export function Gallery() {
                 widths={[400, 700, 1000, 1400]}
                 sizes={i === 0 ? '(min-width: 1024px) 55vw, 100vw' : '(min-width: 1024px) 34vw, 50vw'}
                 data-parallax
-                className="h-full w-full scale-[1.12] object-cover transition-[scale] duration-700 ease-out group-hover:scale-[1.18]"
+                className="h-full w-full scale-[1.12] object-cover transition-[scale] duration-700 ease-out [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.18]"
               />
             </li>
           ))}

@@ -90,7 +90,7 @@ export function Header() {
             <ul className="flex items-center gap-8 text-[0.95rem] font-medium">
               {navItems.map((item) => (
                 <li key={item.href}>
-                  <a href={item.href} className="py-2 text-ink/85 transition-colors hover:text-green">
+                  <a href={item.href} className="nav-link py-2 text-ink/85 transition-colors hover:text-green">
                     {item.label}
                   </a>
                 </li>
