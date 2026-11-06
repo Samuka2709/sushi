@@ -64,10 +64,10 @@ export const images = {
     },
     // PROVISÓRIA
     {
-      unsplash: '1606265752439-1f18756aa5fc',
+      unsplash: '1588776814546-daab30f310ce',
       width: 900,
       height: 1100,
-      alt: 'Dentista com espelho e sonda odontológica',
+      alt: 'Dentista atendendo paciente na cadeira',
       provisional: true,
     },
     // PROVISÓRIA
@@ -80,7 +80,30 @@ export const images = {
     },
   ],
   /** Fotos da equipe: a chave é o valor de `photo` em clinic.team */
-  team: {} as Record<string, ImageSpec>,
+  team: {
+    // PROVISÓRIAS — fotos de banco de imagens, NÃO são os profissionais
+    helena: {
+      unsplash: '1631217868264-e5b90bb7e133',
+      width: 800,
+      height: 1000,
+      alt: 'Retrato de dentista sorrindo no consultório',
+      provisional: true,
+    },
+    rafael: {
+      unsplash: '1612349317150-e413f6a5b16d',
+      width: 800,
+      height: 1000,
+      alt: 'Retrato de dentista de jaleco branco',
+      provisional: true,
+    },
+    camila: {
+      unsplash: '1606265752439-1f18756aa5fc',
+      width: 800,
+      height: 1000,
+      alt: 'Dentista com espelho e sonda odontológica',
+      provisional: true,
+    },
+  } as Record<string, ImageSpec>,
   /** Antes e depois: a chave é o valor de `before`/`after` em clinic.beforeAfter */
   beforeAfter: {} as Record<string, ImageSpec>,
   /** Imagem de compartilhamento (WhatsApp, redes). 1200x630. */

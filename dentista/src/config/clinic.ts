@@ -4,6 +4,9 @@
  * Trocar de clínica = editar só este arquivo (e as fotos em `images.ts`).
  * Nenhum componente tem nome, telefone, endereço ou texto da clínica escrito direto.
  *
+ * >>> DEMONSTRAÇÃO: os valores abaixo são FICTÍCIOS, para apresentar ao cliente.
+ *     Troque tudo pelos dados reais antes de publicar (veja `demo: true`). <<<
+ *
  * Tudo o que está entre colchetes, como `[TELEFONE]`, é um MARCADOR PENDENTE:
  * aparece destacado no site até ser substituído pelo dado real.
  * Nunca preencha com dados inventados (profissionais, CRO, depoimentos, notas,
@@ -64,184 +67,199 @@ export type OpeningHours = {
 };
 
 export const clinic = {
-  name: '[NOME DA CLÍNICA]',
-  /** Ex.: "Odontologia" — usado no título da página e no rodapé */
+  /** true = mostra o aviso "Site de demonstração" no rodapé. Troque para false ao publicar. */
+  demo: true,
+
+  name: 'Clínica Lumière Odontologia', // DEMO
   specialty: 'Clínica odontológica',
-  city: '[CIDADE]',
-  neighborhood: '[BAIRRO]',
-  state: '[UF]',
+  city: 'São Paulo', // DEMO
+  neighborhood: 'Vila Mariana', // DEMO
+  state: 'SP', // DEMO
 
   responsible: {
-    name: '[NOME DO RESPONSÁVEL TÉCNICO]',
-    cro: 'CRO-[UF] [NÚMERO]',
+    name: 'Dra. Helena Duarte', // DEMO — fictícia
+    cro: 'CRO-SP 00.000', // DEMO — fictício
   },
 
-  /** Como aparece no site, ex.: "(11) 3333-4444" */
-  phone: '[TELEFONE]',
-  /** Só números, com DDI 55, ex.: "5511999998888" */
-  whatsapp: '[WHATSAPP]',
+  phone: '(11) 3000-0000', // DEMO
+  /** Só números, com DDI 55. Vazio = abre o WhatsApp para escolher o contato. */
+  whatsapp: '', // DEMO
   whatsappMessage: 'Olá, vim pelo site e gostaria de agendar uma consulta.',
 
   address: {
-    street: '[RUA E NÚMERO]',
-    complement: '', // opcional, ex.: "Sala 12"
-    neighborhood: '[BAIRRO]',
-    city: '[CIDADE]',
-    state: '[UF]',
-    zip: '[CEP]',
+    street: 'Rua das Acácias, 120', // DEMO — endereço fictício
+    complement: 'Sala 4',
+    neighborhood: 'Vila Mariana',
+    city: 'São Paulo',
+    state: 'SP',
+    zip: '04000-000',
   },
-  mapsUrl: '[LINK DO GOOGLE MAPS]',
+  mapsUrl: '', // DEMO — vazio = busca pelo endereço
 
   hours: [
     {
-      label: '[DIAS DE ATENDIMENTO]',
-      time: '[HORÁRIO]',
-      days: [],
-      opens: '',
-      closes: '',
+      label: 'Segunda a sexta',
+      time: '8h às 19h',
+      days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '19:00',
     },
+    { label: 'Sábado', time: '8h às 12h', days: ['Saturday'], opens: '08:00', closes: '12:00' },
   ] as OpeningHours[],
 
-  /** Deixe o array vazio para esconder. Links com marcador aparecem como texto, sem link. */
-  social: [{ label: 'Instagram', handle: '[@PERFIL]', url: '[LINK DO INSTAGRAM]' }],
+  social: [{ label: 'Instagram', handle: '@lumiere.odonto', url: 'https://www.instagram.com/' }], // DEMO
 
-  /** Convênios aceitos ou "Atendimento particular" */
-  insurance: '[CONVÊNIOS ACEITOS OU "PARTICULAR"]',
+  insurance: 'Atendimento particular, com reembolso para os principais planos', // DEMO
 
-  /** Caminho de um arquivo em /public (ex.: "/logo.svg") ou null para usar o nome em texto */
   logo: null as string | null,
-
-  /** Público principal e tom — orientam os textos; não aparecem no site */
-  audience: '[PÚBLICO PRINCIPAL]',
+  audience: 'Adultos e famílias',
   tone: 'acolhedor e sofisticado',
-
-  /** Endereço final do site, sem barra no fim (ex.: "https://www.clinica.com.br"). Usado no canonical e no Open Graph. */
   siteUrl: '',
+  privacyEmail: 'privacidade@exemplo.com.br', // DEMO
 
-  /** E-mail de contato para assuntos de privacidade (LGPD) */
-  privacyEmail: '[E-MAIL PARA PRIVACIDADE]',
-
-  /* --------------------------------------------------------------------------
-   * TRATAMENTOS — apenas os que a clínica realmente oferece.
-   * Mais de 6 itens: o site agrupa automaticamente por `category`.
-   * ------------------------------------------------------------------------ */
   treatments: [
     {
-      id: 'tratamento-1',
-      name: '[TRATAMENTO 1]',
-      category: '[CATEGORIA]',
-      summary: '[DESCRIÇÃO DE 1 A 2 FRASES]',
-      details: ['[O QUE É, PARA QUEM É INDICADO E COMO É FEITO]'],
+      id: 'clinico-geral',
+      name: 'Clínico geral',
+      category: 'Prevenção',
+      summary: 'Consulta de avaliação, limpeza, restaurações e acompanhamento da saúde da boca.',
+      details: [
+        'A consulta começa por uma conversa sobre seu histórico e suas queixas, seguida de exame clínico completo.',
+        'Inclui limpeza profissional, aplicação de flúor quando indicada e restaurações em resina da cor do dente.',
+      ],
     },
     {
-      id: 'tratamento-2',
-      name: '[TRATAMENTO 2]',
-      category: '[CATEGORIA]',
-      summary: '[DESCRIÇÃO DE 1 A 2 FRASES]',
-      details: ['[O QUE É, PARA QUEM É INDICADO E COMO É FEITO]'],
+      id: 'implantes',
+      name: 'Implantes dentários',
+      category: 'Reabilitação',
+      summary: 'Reposição de dentes perdidos com implantes, planejada a partir de exames de imagem.',
+      details: [
+        'O planejamento usa tomografia para avaliar o osso e definir a posição do implante.',
+        'O tempo de tratamento varia conforme cada caso e é explicado na avaliação.',
+      ],
     },
     {
-      id: 'tratamento-3',
-      name: '[TRATAMENTO 3]',
-      category: '[CATEGORIA]',
-      summary: '[DESCRIÇÃO DE 1 A 2 FRASES]',
-      details: ['[O QUE É, PARA QUEM É INDICADO E COMO É FEITO]'],
+      id: 'ortodontia',
+      name: 'Ortodontia e alinhadores',
+      category: 'Ortodontia',
+      summary: 'Aparelho fixo ou alinhadores transparentes para corrigir a posição dos dentes.',
+      details: [
+        'Depois da documentação ortodôntica, o profissional indica o tipo de aparelho mais adequado.',
+        'Atendemos adolescentes e adultos, com consultas de manutenção periódicas.',
+      ],
     },
     {
-      id: 'tratamento-4',
-      name: '[TRATAMENTO 4]',
-      category: '[CATEGORIA]',
-      summary: '[DESCRIÇÃO DE 1 A 2 FRASES]',
-      details: ['[O QUE É, PARA QUEM É INDICADO E COMO É FEITO]'],
+      id: 'clareamento',
+      name: 'Clareamento dental',
+      category: 'Estética',
+      summary: 'Clareamento em consultório ou caseiro supervisionado, após avaliação.',
+      details: [
+        'Antes de clarear, verificamos se há cáries, restaurações ou sensibilidade que precisem de cuidado.',
+        'O resultado varia de pessoa para pessoa.',
+      ],
     },
     {
-      id: 'tratamento-5',
-      name: '[TRATAMENTO 5]',
-      category: '[CATEGORIA]',
-      summary: '[DESCRIÇÃO DE 1 A 2 FRASES]',
-      details: ['[O QUE É, PARA QUEM É INDICADO E COMO É FEITO]'],
+      id: 'facetas',
+      name: 'Facetas e lentes de contato',
+      category: 'Estética',
+      summary: 'Lâminas de porcelana ou resina para ajustar forma e cor dos dentes.',
+      details: [
+        'O planejamento inclui fotos e um ensaio do sorriso antes de qualquer desgaste.',
+        'Nem todo caso é indicado para facetas: isso é definido na avaliação.',
+      ],
     },
     {
-      id: 'tratamento-6',
-      name: '[TRATAMENTO 6]',
-      category: '[CATEGORIA]',
-      summary: '[DESCRIÇÃO DE 1 A 2 FRASES]',
-      details: ['[O QUE É, PARA QUEM É INDICADO E COMO É FEITO]'],
+      id: 'endodontia',
+      name: 'Tratamento de canal',
+      category: 'Reabilitação',
+      summary: 'Tratamento da polpa do dente para aliviar a dor e preservar o dente natural.',
+      details: [
+        'Feito com anestesia local e, sempre que possível, em uma ou duas sessões.',
+        'Em caso de dor, entre em contato pelo WhatsApp para verificarmos um horário.',
+      ],
     },
   ] as Treatment[],
 
-  /* Diferenciais REAIS (3 a 4). Ícones disponíveis: veja IconName acima. */
   differentials: [
-    { icon: 'calendar-check', title: '[DIFERENCIAL 1]', text: '[FRASE CURTA]' },
-    { icon: 'map-pin', title: '[DIFERENCIAL 2]', text: '[FRASE CURTA]' },
-    { icon: 'heart-handshake', title: '[DIFERENCIAL 3]', text: '[FRASE CURTA]' },
-    { icon: 'shield-check', title: '[DIFERENCIAL 4]', text: '[FRASE CURTA]' },
+    { icon: 'calendar-check', title: 'Horário pontual', text: 'Agenda organizada para você não esperar na recepção.' },
+    { icon: 'scan', title: 'Exames no consultório', text: 'Radiografia digital feita na própria clínica.' },
+    {
+      icon: 'heart-handshake',
+      title: 'Plano explicado',
+      text: 'Você recebe o plano de tratamento por escrito, com as etapas.',
+    },
+    { icon: 'map-pin', title: 'Perto do metrô', text: 'A poucos minutos a pé da estação Vila Mariana.' },
   ] as { icon: IconName; title: string; text: string }[],
 
-  /* Equipe — só profissionais reais, com CRO. */
   team: [
     {
-      name: '[NOME DO PROFISSIONAL]',
-      cro: 'CRO-[UF] [NÚMERO]',
-      specialty: '[ESPECIALIDADE]',
-      bio: '[MINI-BIO DE 2 LINHAS]',
-      photo: null,
+      name: 'Dra. Helena Duarte', // DEMO — fictícia
+      cro: 'CRO-SP 00.000',
+      specialty: 'Implantodontia',
+      bio: 'Responsável técnica da clínica. Atua em reabilitação oral e implantes.',
+      photo: 'helena',
+    },
+    {
+      name: 'Dr. Rafael Moreira', // DEMO — fictício
+      cro: 'CRO-SP 00.001',
+      specialty: 'Ortodontia',
+      bio: 'Atende adolescentes e adultos com aparelhos fixos e alinhadores.',
+      photo: 'rafael',
+    },
+    {
+      name: 'Dra. Camila Nogueira', // DEMO — fictícia
+      cro: 'CRO-SP 00.002',
+      specialty: 'Dentística e estética',
+      bio: 'Cuida de restaurações, clareamento e facetas.',
+      photo: 'camila',
     },
   ] as Professional[],
 
-  /* Depoimentos AUTORIZADOS. Vazio = a seção não aparece (nunca criar texto falso). */
+  /* Depoimentos: só reais e autorizados. Vazio = a seção não aparece. */
   testimonials: [] as Testimonial[],
 
-  /* Antes e depois: só com fotos autorizadas pelos pacientes. false = a seção vira galeria. */
   hasBeforeAfter: false,
   beforeAfter: [] as { treatment: string; before: string; after: string }[],
 
-  /* --------------------------------------------------------------------------
-   * TEXTOS DA PÁGINA
-   * ------------------------------------------------------------------------ */
   content: {
-    heroEyebrow: '[BAIRRO] · [CIDADE]',
-    /** Curto e específico: o que e onde. Sem clichês. */
-    heroTitle: 'Odontologia no coração de [BAIRRO]',
-    heroSubtitle: '[SUBTÍTULO DE UMA LINHA COM OS PRINCIPAIS TRATAMENTOS]',
+    heroEyebrow: 'Vila Mariana · São Paulo',
+    heroTitle: 'Odontologia no coração da Vila Mariana',
+    heroSubtitle: 'Clínico geral, implantes, ortodontia e estética, com consultas sem pressa.',
 
     aboutTitle: 'Um consultório para ser atendido sem pressa',
     aboutParagraphs: [
-      'A [NOME DA CLÍNICA] fica em [BAIRRO], [CIDADE]. [EM UMA FRASE: QUEM A CLÍNICA ATENDE E O QUE FAZ.]',
-      '[COMO É O ATENDIMENTO: A PRIMEIRA CONVERSA, A EXPLICAÇÃO DO PLANO DE TRATAMENTO, O ACOMPANHAMENTO.]',
-      '[A ESTRUTURA DO ESPAÇO, SE FOR RELEVANTE PARA O PACIENTE.]',
+      'A Clínica Lumière fica na Vila Mariana, em São Paulo. Atendemos adultos e famílias, da prevenção à reabilitação.',
+      'A primeira consulta começa por uma conversa. Depois do exame, explicamos o que encontramos e as opções de tratamento, com as etapas por escrito.',
+      'O espaço tem salas com luz natural e radiografia digital no próprio consultório.',
     ],
 
     treatmentsTitle: 'Tratamentos',
     treatmentsIntro: 'O que fazemos no consultório. Toque em um tratamento para ver os detalhes.',
-
     differentialsTitle: 'Por que agendar aqui',
-
     teamTitle: 'Quem vai atender você',
-
     galleryTitle: 'Conheça o espaço',
 
     faqTitle: 'Perguntas frequentes',
     faq: [
       {
         q: 'Como funciona a primeira consulta?',
-        a: '[RESPOSTA A CONFIRMAR PELA CLÍNICA: duração, o que é avaliado, se há exames.]',
+        a: 'Dura cerca de 40 minutos. Conversamos sobre seu histórico, fazemos o exame clínico e, se necessário, radiografias. No fim, você recebe o plano de tratamento.',
       },
       {
         q: 'Vocês atendem convênio?',
-        a: '[RESPOSTA A CONFIRMAR PELA CLÍNICA: lista de convênios ou "atendimento particular".]',
+        a: 'O atendimento é particular. Emitimos a documentação para você pedir reembolso ao seu plano.',
       },
       {
         q: 'Quais são as formas de pagamento?',
-        a: '[RESPOSTA A CONFIRMAR PELA CLÍNICA: formas e condições de pagamento.]',
+        a: 'Pix, cartão de débito e cartão de crédito. As condições são apresentadas junto com o plano de tratamento.',
       },
       {
         q: 'Vocês atendem urgências?',
-        a: '[RESPOSTA A CONFIRMAR PELA CLÍNICA: como proceder em caso de dor ou urgência.]',
+        a: 'Em caso de dor, fale com a gente pelo WhatsApp. Reservamos horários na agenda para encaixes no mesmo dia, sempre que possível.',
       },
       {
         q: 'Tem estacionamento?',
-        a: '[RESPOSTA A CONFIRMAR PELA CLÍNICA: estacionamento próprio, conveniado ou na rua.]',
+        a: 'Há estacionamento conveniado na mesma rua. A clínica fica a poucos minutos a pé do metrô.',
       },
       {
         q: 'Como faço para agendar?',
@@ -251,15 +269,14 @@ export const clinic = {
 
     contactTitle: 'Agende sua consulta',
     contactIntro: 'Fale com a equipe pelo WhatsApp ou deixe seus dados que entramos em contato.',
-
-    /** Opções do formulário */
     formTimes: ['Manhã', 'Tarde', 'Qualquer horário'],
     formReasons: [
       'Avaliação / primeira consulta',
       'Dor ou urgência',
       'Limpeza e prevenção',
-      'Estética',
-      'Continuar um tratamento',
+      'Implantes',
+      'Ortodontia / alinhadores',
+      'Estética (clareamento, facetas)',
       'Outro assunto',
     ],
   },

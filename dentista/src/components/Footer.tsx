@@ -91,6 +91,7 @@ export function Footer({ home = true }: { home?: boolean }) {
       </div>
 
       <div className="container-x mt-14 flex flex-col gap-3 border-t border-bg/15 pt-8 text-[0.875rem] md:flex-row md:items-center md:justify-between">
+        {clinic.demo && <p className="font-semibold text-bg">Site de demonstração — dados e fotos ilustrativos.</p>}
         <p>
           Responsável técnico: <Ph>{clinic.responsible.name}</Ph> — <Ph>{clinic.responsible.cro}</Ph>
         </p>
