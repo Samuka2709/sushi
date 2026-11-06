@@ -1,0 +1,254 @@
+/* Fontes auto-hospedadas (font-display: swap), só os pesos usados e só o subconjunto latino */
+@import '@fontsource/cormorant-garamond/latin-500.css';
+@import '@fontsource/cormorant-garamond/latin-600.css';
+@import '@fontsource/manrope/latin-400.css';
+@import '@fontsource/manrope/latin-500.css';
+@import '@fontsource/manrope/latin-600.css';
+
+@import 'tailwindcss';
+
+/*
+ * Paleta — contraste WCAG AA conferido:
+ *  grafite  #242725 sobre off-white 13.4:1 · sobre areia 9.8:1
+ *  verde    #34443F sobre off-white 9.1:1  · sobre areia 6.7:1
+ *  off-white sobre verde 9.1:1 · areia sobre verde 6.7:1
+ *  muted    #575C58 sobre off-white 5.6:1 (texto secundário)
+ *  taupe    #A89B88 só em bordas e detalhes (2.4:1 — reprovado para texto)
+ */
+@theme {
+  --color-bg: #f5f1ea;
+  --color-sand: #d9cfc0;
+  --color-taupe: #a89b88;
+  --color-green: #34443f;
+  --color-green-deep: #2a3733;
+  --color-ink: #242725;
+  --color-muted: #575c58;
+
+  --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-sans: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius-card: 12px;
+  --shadow-soft: 0 1px 2px rgb(36 39 37 / 0.04), 0 8px 24px -12px rgb(36 39 37 / 0.12);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  @media (min-width: 768px) {
+    body {
+      font-size: 1.125rem;
+    }
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--color-green);
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--color-bg);
+  }
+  ::selection {
+    background: var(--color-sand);
+    color: var(--color-ink);
+  }
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 82rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-x {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .on-dark .eyebrow {
+    color: var(--color-sand);
+  }
+
+  .h2 {
+    font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.5rem);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.975rem;
+    line-height: 1.2;
+    text-decoration: none;
+    transition:
+      background-color 200ms,
+      color 200ms,
+      border-color 200ms,
+      transform 200ms;
+  }
+  .btn-primary {
+    background: var(--color-green);
+    color: var(--color-bg);
+  }
+  .btn-primary:hover {
+    background: var(--color-green-deep);
+  }
+  .btn-ghost {
+    border: 1px solid var(--color-green);
+    color: var(--color-green);
+  }
+  .btn-ghost:hover {
+    background: var(--color-green);
+    color: var(--color-bg);
+  }
+  .btn-light {
+    background: var(--color-bg);
+    color: var(--color-green);
+  }
+  .btn-light:hover {
+    background: #fff;
+  }
+  .btn-outline-light {
+    border: 1px solid rgb(245 241 234 / 0.6);
+    color: var(--color-bg);
+  }
+  .btn-outline-light:hover {
+    background: rgb(245 241 234 / 0.1);
+  }
+
+  .link {
+    color: var(--color-green);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--color-taupe);
+    text-underline-offset: 0.25em;
+    transition: text-decoration-color 200ms;
+  }
+  .link:hover {
+    text-decoration-color: currentColor;
+  }
+
+  .card {
+    background: #fbf9f5;
+    border: 1px solid rgb(168 155 136 / 0.35);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+    transition:
+      transform 200ms ease,
+      box-shadow 200ms ease;
+  }
+  @media (hover: hover) {
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 1px 2px rgb(36 39 37 / 0.04),
+        0 16px 32px -16px rgb(36 39 37 / 0.2);
+    }
+  }
+
+  /* Marcador pendente: visível de propósito até ser preenchido */
+  .ph {
+    background: rgb(217 207 192 / 0.55);
+    outline: 1px dashed var(--color-taupe);
+    outline-offset: 1px;
+    border-radius: 3px;
+    padding-inline: 0.2em;
+    font-style: normal;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .on-dark .ph {
+    background: rgb(245 241 234 / 0.12);
+    outline-color: var(--color-sand);
+  }
+
+  .field {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid rgb(245 241 234 / 0.35);
+    background: rgb(245 241 234 / 0.06);
+    color: var(--color-bg);
+    font: inherit;
+    font-size: 1rem;
+  }
+  .field:focus-visible {
+    outline: 2px solid var(--color-bg);
+    outline-offset: 2px;
+  }
+  .field option {
+    color: var(--color-ink);
+  }
+}
+
+/*
+ * Animações: o HTML já vem com tudo visível. Só quando o JavaScript carrega
+ * (classe js-ready no <html>) o hero começa escondido para entrar animado.
+ * Se o script falhar, um temporizador no <head> remove a classe.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .js-ready [data-hero-item] {
+    opacity: 0;
+  }
+}
+
+/* Esconde a barra fixa do celular quando o painel do menu está aberto */
+body.menu-open .mobile-cta {
+  display: none;
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+dialog::backdrop {
+  background: rgb(36 39 37 / 0.45);
+}
